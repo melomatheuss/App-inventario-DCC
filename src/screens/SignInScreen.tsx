@@ -5,8 +5,10 @@ import { styles } from './styles';
 
 import { MyButton } from '../components/MyButton';
 import logo from '../../src/assets/logo.png';
+import { useAuth } from '../contexts/Auth';
 
 export function SignInScreen() {
+  const {signIn} = useAuth()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -33,7 +35,7 @@ export function SignInScreen() {
         value={password}
         onChangeText={setPassword}
       />
-      <MyButton title='Entrar no App'/>
+      <MyButton onPress = {() => signIn(email, password)} title='Entrar no App'/>
     </View>
   );
 }
