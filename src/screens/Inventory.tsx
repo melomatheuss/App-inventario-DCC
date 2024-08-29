@@ -4,17 +4,13 @@ import {MyButton} from '../components/MyButton';
 import {useAuth} from '../contexts/Auth';
 import {styles} from './styles';
 
-export function iventoryScreen() {
+export function IventoryScreen() {   // TODO: fazer a parte de vizualizacao de dados do iventario
   const {signOut} = useAuth();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Configurações</Text>
-      <MyButton
-        style={{backgroundColor: 'red'}}
-        onPress={signOut}
-        title="Sair do App"
-      />
+      <Text style={styles.title}>Inventário</Text>
+
     </View>
   );
 }
