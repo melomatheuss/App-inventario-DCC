@@ -1,15 +1,29 @@
+
 /*
 
 import { createContext } from "react";
 
-interface AuthContextData{
-    auth: {
-        token: string;
-        email: string;
-        name:string;
-    }
-    signIn:(emai: string, password: string) => Promise<>;
+interface AuthData{
+    token: string;
+    email: string;
+    name: string;
+    //outros dados que podem ser necessarios para o usuario logado
 }
-export const AuthContext = createContext({})
+
+interface AuthContextData{
+    authData: AuthData;
+    signIn:(email: string, password: string) => Promise< AuthData>;
+    signOut: () => Promise<void>;
+}
+export const AuthContext = createContext<AuthContextData>(
+    {} as AuthContextData
+);  //define a formacomo os dados sao apresentados
+
+export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+      const [authData, setAuthData] = useState<AuthData | null>(null);
+    return <AuthContext.Provider value = {{authData, signIn, signOut}}>{children}</AuthContext.Provider>;
+    
+};
 
 */
+
