@@ -4,6 +4,7 @@ import { authService } from "../services/authService";
 import { Alert } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
 export interface AuthData {
   token: string;
   email: string;
@@ -27,8 +28,10 @@ export const AuthProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
+    setTimeout(() => {
     loadFromStorage();
-  }, []);
+  },1000);
+ },[]);
 
   async function loadFromStorage() {
     const auth = await AsyncStorage.getItem('@AuthData');
