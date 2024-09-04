@@ -2,9 +2,9 @@ import React from 'react';
 import {View, Text} from 'react-native';
 
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {MyButton} from '../components/MyButton';
-import {styles} from './styles';
-import { useAuth } from '../contexts/Auth';
+import {MyButton} from '../../components/MyButton';
+import {styles} from '../styles';
+import { useAuth } from '../../contexts/Auth';
 
 
 type RootStackParamList = {
