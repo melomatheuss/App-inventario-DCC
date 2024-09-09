@@ -56,10 +56,9 @@ const styles = StyleSheet.create({
 
 */
 
-
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
-import { Camera, CameraView, CameraType, BarcodeScanningResult } from 'expo-camera';
+import { Camera, CameraView, BarcodeScanningResult } from 'expo-camera';
 
 export default function BarcodeScanner() {
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
@@ -87,13 +86,15 @@ export default function BarcodeScanner() {
   return (
     <View style={styles.container}>
       <CameraView
-         style={styles.camera} 
+        style={styles.camera} 
         onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
         barcodeScannerSettings={{
-        barcodeTypes: ['qr', 'ean13', 'code128'], // Adapta os tipos de código conforme necessário
-      }}  
-    />
+          barcodeTypes: ['qr', 'ean13', 'code128'],
+        }}
+      />
 
+      {/* Linha de mira menor e centralizada */}
+      <View style={styles.targetLine} />
 
       {scanned && (
         <Button title={'Toque para escanear de novo'} onPress={() => setScanned(false)} />
@@ -108,9 +109,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   camera: {
-    flex: 1, 
+    flex: 1,
     width: '100%',
     height: '100%',
   },
+  targetLine: {
+    position: 'absolute',
+    top: '50%', // Centraliza verticalmente
+    left: '25%', // Começa a 25% da largura da tela
+    right: '25%', // Termina a 75% da largura da tela (linha centralizada)
+    height: 2, // Altura da linha
+    backgroundColor: '#F0F0F0', // Cor da linha
+  },
 });
-
