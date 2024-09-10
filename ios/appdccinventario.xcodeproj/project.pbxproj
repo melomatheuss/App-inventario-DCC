@@ -313,6 +313,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				SWIFT_OBJC_BRIDGING_HEADER = appdccinventario/appdccinventario-Bridging-Header.h;
+				CODE_SIGN_ENTITLEMENTS = appdccinventario/appdccinventario.entitlements;
 			};
 			name = Debug;
 		};
@@ -338,6 +339,7 @@
 				VERSIONING_SYSTEM = "apple-generic";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				SWIFT_OBJC_BRIDGING_HEADER = appdccinventario/appdccinventario-Bridging-Header.h;
+				CODE_SIGN_ENTITLEMENTS = appdccinventario/appdccinventario.entitlements;
 			};
 			name = Release;
 		};

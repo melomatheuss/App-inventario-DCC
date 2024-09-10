@@ -1,4 +1,4 @@
-package com.appdccinventario
+package com.anonymous.appdccinventario
 
 import android.os.Build
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.appdccinventario
+package com.anonymous.appdccinventario
 
 import android.app.Application
 import android.content.res.Configuration
