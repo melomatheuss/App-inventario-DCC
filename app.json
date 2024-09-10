@@ -15,8 +15,6 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.anonymous.appdccinventario",
       "googleServicesFile": "GoogleService-Info.plist"
-
-      
     },
     "android": {
       "adaptiveIcon": {
@@ -35,10 +33,9 @@
     },
     "plugins": [
       [
-        "expo-camera",
+        "react-native-vision-camera",
         {
-          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera",
-          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone"
+          "enableCodeScanner": true
         }
       ],
       "expo-font",

@@ -1,101 +1,91 @@
-/*
-
-import React, { useState, useEffect } from 'react';
-import { Text, View, Button, StyleSheet } from 'react-native';
-import { Camera } from 'expo-camera';
+import React, { useState, useRef } from 'react';
+import { Text, View, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
+import * as MediaLibrary from 'expo-media-library';
 
 export default function ScanBarCodeScreen() {
-  const [hasPermission, setHasPermission] = useState<boolean | null>(null);
+  const [hasPermission, requestPermission] = useCameraPermissions();
   const [scanned, setScanned] = useState(false);
-  const [data, setData] = useState<string>('');
+  const [photoUri, setPhotoUri] = useState<string | null>(null);
+  const [facing, setFacing] = useState<CameraType>('back');
+  const cameraRef = useRef<CameraView>(null);
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
+  if (!hasPermission) {
+    // Camera permissions are still loading.
+    return <View />;
+  }
 
-  const handleBarCodeScanned = ({ type, data }: { type: string, data: string }) => {
+  if (!hasPermission.granted) {
+    // Camera permissions are not granted yet.
+    return (
+      <View style={styles.container}>
+        <Text style={styles.message}>We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="Grant Permission" />
+      </View>
+    );
+  }
+
+  const handleBarcodeScanned = (scanningResult: { data: string }) => {
     setScanned(true);
-    setData(data);
-    alert(`Código de barras com o tipo ${type} e dado ${data} foi escaneado!`);
+    alert(`Código de barras encontrado: ${scanningResult.data}`);
   };
 
-  if (hasPermission === null) {
-    return <Text>Solicitando permissão para acessar a câmera...</Text>;
-  }
-  if (hasPermission === false) {
-    return <Text>Sem acesso à câmera</Text>;
-  }
+  const takePicture = async () => {
+    if (cameraRef.current) {
+      const photo = await cameraRef.current.takePictureAsync();
+      if (photo) {
+        setPhotoUri(photo.uri);
 
- 
-  return (
-    <View style={styles.container}>
-      <Camera
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-        barCodeScannerSettings={{
-          barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr, BarCodeScanner.Constants.BarCodeType.code128],
-        }}
-      />
-      {scanned && <Button title={'Escanear novamente'} onPress={() => setScanned(false)} />}
-      <Text>{data}</Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
-
-
-*/
-
-import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
-import { Camera, CameraView, BarcodeScanningResult } from 'expo-camera';
-
-export default function BarcodeScanner() {
-  const [hasPermission, setHasPermission] = useState<boolean | null>(null);
-  const [scanned, setScanned] = useState(false);
-
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setHasPermission(status === 'granted');
-    })();
-  }, []);
-
-  const handleBarCodeScanned = (scanningResult: BarcodeScanningResult) => {
-    setScanned(true);
-    alert(`Barcode found: ${scanningResult.data}`);
+        // Salva a foto na galeria
+        await MediaLibrary.saveToLibraryAsync(photo.uri);
+        alert('Foto salva na galeria com sucesso!');
+      }
+    }
   };
 
-  if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
-  }
-  if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
-  }
+  const toggleCameraFacing = () => {
+    setFacing(current => (current === 'back' ? 'front' : 'back'));
+  };
 
   return (
     <View style={styles.container}>
       <CameraView
-        style={styles.camera} 
-        onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
+        ref={cameraRef}
+        style={styles.camera}
+        facing={facing}
+        onBarcodeScanned={scanned ? undefined : handleBarcodeScanned}
         barcodeScannerSettings={{
-          barcodeTypes: ['qr', 'ean13', 'code128'],
+          barcodeTypes: [
+            'aztec',
+            'ean13',
+            'ean8',
+            'qr',
+            'pdf417',
+            'upc_e',
+            'datamatrix',
+            'code39',
+            'code93',
+            'itf14',
+            'codabar',
+            'code128',
+            'upc_a',
+          ]
         }}
-      />
+      >
+        {/* Linha de mira menor e centralizada */}
+        <View style={styles.targetLine} />
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+            <Text style={styles.text}>Flip Camera</Text>
+          </TouchableOpacity>
+        </View>
+      </CameraView>
 
-      {/* Linha de mira menor e centralizada */}
-      <View style={styles.targetLine} />
+      {photoUri && (
+        <Image source={{ uri: photoUri }} style={styles.photo} />
+      )}
 
+      <Button title={'Tirar Foto'} onPress={takePicture} />
       {scanned && (
         <Button title={'Toque para escanear de novo'} onPress={() => setScanned(false)} />
       )}
@@ -107,6 +97,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    alignItems: 'center',
+  },
+  message: {
+    textAlign: 'center',
+    paddingBottom: 10,
   },
   camera: {
     flex: 1,
@@ -120,5 +115,27 @@ const styles = StyleSheet.create({
     right: '25%', // Termina a 75% da largura da tela (linha centralizada)
     height: 2, // Altura da linha
     backgroundColor: '#F0F0F0', // Cor da linha
+  },
+  photo: {
+    width: '100%',
+    height: 200,
+    marginVertical: 10,
+  },
+  buttonContainer: {
+    position: 'absolute',
+    bottom: 50,
+    left: 20,
+    right: 20,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  button: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    padding: 10,
+    borderRadius: 5,
+  },
+  text: {
+    fontSize: 18,
+    color: 'white',
   },
 });
