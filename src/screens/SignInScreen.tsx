@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
-import { Image, View, Text } from 'react-native';
+import { Image, View } from 'react-native';
 import { MyTextInput } from '../components/MyTextInput';
 import { styles } from './styles';
-
 import { MyButton } from '../components/MyButton';
 import logo from '../../src/assets/logo.png';
-import { useAuth } from '../contexts/Auth';
+
+import auth from '@react-native-firebase/auth';
+import { useNavigation } from '@react-navigation/native';
+import { SignInScreenNavigationProp } from '../routes/Router';
 
 export function SignInScreen() {
-  const {signIn} = useAuth()
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [userMail, setUserMail] = useState('');
+  const [userPass, setUserPass] = useState('');
+  const navigation = useNavigation<SignInScreenNavigationProp>();
 
+  function userLogin() {
+    auth().signInWithEmailAndPassword(userMail, userPass).then(() => {
+      alert('Login efetuado com sucesso');
+      navigation.navigate('Home');
+    })
+    .catch(error => {
+      alert('Login invalido! Tente novamente.')
+      const errorMessage = error.message;
+      alert(errorMessage);
+      console.log(errorMessage)
+    });
+  }
+  
   return (
     <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
       <Image 
@@ -26,16 +41,16 @@ export function SignInScreen() {
   
       <MyTextInput
         placeholder='E-mail'
-        value={email}
-        onChangeText={setEmail}
+        value={userMail}
+        onChangeText={setUserMail}
       />
       <MyTextInput 
         secureTextEntry
         placeholder='Senha'
-        value={password}
-        onChangeText={setPassword}
+        value={userPass}
+        onChangeText={setUserPass}
       />
-      <MyButton onPress = {() => signIn(email, password)} title='Entrar no App'/>
+      <MyButton onPress = {userLogin} title='Entrar no App'/>
     </View>
   );
 }

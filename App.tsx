@@ -1,16 +1,16 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { Router } from './src/routes/Router';
-import { AuthProvider } from './src/contexts/Auth';
-
+import { NavegationRoutes } from './src/routes/Router';
+// import { AuthProvider } from './src/contexts/Auth';
+import { FirebaseProvider } from './src/contexts/firebaseContext';
 
 
 
 const App = () => {
+
   return(
-  <AuthProvider>
-    <Router/>
-  </AuthProvider>
+    <FirebaseProvider>
+      <NavegationRoutes/>
+    </FirebaseProvider>
   );
 };
 

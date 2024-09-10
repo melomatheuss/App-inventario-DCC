@@ -4,7 +4,7 @@ import {View, Text} from 'react-native';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {MyButton} from '../../components/MyButton';
 import {styles} from '../styles';
-import { useAuth } from '../../contexts/Auth';
+// import { useAuth } from '../../contexts/Auth';
 
 
 type RootStackParamList = {
@@ -15,7 +15,7 @@ type RootStackParamList = {
 
 export function HomeScreen() {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  const {signOut} = useAuth();
+  // const {signOut} = useAuth();
 
   return (
     <View style={styles.container}>
@@ -28,7 +28,7 @@ export function HomeScreen() {
       <MyButton title='Inventário' onPress={() => navigation.navigate('Iventory')}/>
       <MyButton
         style={{backgroundColor: 'red'}}
-        onPress={signOut}
+        // onPress={signOut}
         title="Sair do App"
       />
       <Text>

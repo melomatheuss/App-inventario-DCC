@@ -1,25 +1,34 @@
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { HomeScreen } from "../screens/HomeScreen/HomeScreen";
+import ScanBarCodeScreen from "../screens/ScanBarCode/ScanBarCodeScreen";
 import { NavigationContainer } from '@react-navigation/native';
-import React from 'react';
-import { AppStack } from './AppStack';
-import { AuthStack } from './AuthStack';
-import { useAuth } from '../contexts/Auth';
-import { View, Text } from 'react-native';
+import { InventoryScreen } from "../screens/Inventory/InventoryScreen";
+import { SignInScreen } from "../screens/SignInScreen";
+import { StackNavigationProp } from '@react-navigation/stack';
 
 
+export type RootStackParamList = {
+    SignIn: undefined;
+    Home: undefined;
+    // Adicione outras rotas aqui
+};
+export type SignInScreenNavigationProp = StackNavigationProp<RootStackParamList, 'SignIn'>;
 
-export function Router() {
-  const {authData, isLoading} = useAuth();
+const Stack = createNativeStackNavigator();
 
-  if (isLoading) {
-    return (
-      <View style={{justifyContent: 'center', alignItems: 'center', flex: 1}}>
-        <Text>Carregando informações....</Text>
-      </View>
-    );
-  }
-  return (
-    <NavigationContainer>
-      {authData ? <AppStack /> : <AuthStack />}
-    </NavigationContainer>
-  );
+export function NavegationRoutes(){
+    return(
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName="SignInScreen">
+                <Stack.Screen name="SignInScreen" component={SignInScreen} />
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <Stack.Screen name="ScanBarCode" component={ScanBarCodeScreen} />
+                <Stack.Screen name="Iventory" component={InventoryScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+
+    )
 }
+
+export default NavegationRoutes;
