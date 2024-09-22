@@ -33,7 +33,7 @@ export function SignInScreen() {
         style={{ 
           width: 200,
           height: 200,
-          marginBottom: 10  // Reduz o espaço entre a logo e o texto
+          marginBottom: 10                                                  // Reduz o espaço entre a logo e o texto
         }}
         resizeMode='contain'
         source={logo}
