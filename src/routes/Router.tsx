@@ -6,6 +6,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { InventoryScreen } from "../screens/Inventory/InventoryScreen";
 import { SignInScreen } from "../screens/SignInScreen";
 import { StackNavigationProp } from '@react-navigation/stack';
+import { RegistrationScreen } from "../screens/Registration/RegistrationScreen";
 
 
 export type RootStackParamList = {
@@ -24,7 +25,8 @@ export function NavegationRoutes(){
                 <Stack.Screen name="SignInScreen" component={SignInScreen} />
                 <Stack.Screen name="Home" component={HomeScreen} />
                 <Stack.Screen name="ScanBarCode" component={ScanBarCodeScreen} />
-                <Stack.Screen name="Iventory" component={InventoryScreen} />
+                <Stack.Screen name="Inventory" component={InventoryScreen} />
+                <Stack.Screen name="Registration" component={RegistrationScreen} /> 
             </Stack.Navigator>
         </NavigationContainer>
 

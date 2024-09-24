@@ -74,18 +74,12 @@ export default function ScanBarCodeScreen() {
       >
         {/* Linha de mira menor e centralizada */}
         <View style={styles.targetLine} />
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-            <Text style={styles.text}>Flip Camera</Text>
-          </TouchableOpacity>
-        </View>
       </CameraView>
 
       {photoUri && (
         <Image source={{ uri: photoUri }} style={styles.photo} />
       )}
 
-      <Button title={'Tirar Foto'} onPress={takePicture} />
       {scanned && (
         <Button title={'Toque para escanear de novo'} onPress={() => setScanned(false)} />
       )}

@@ -1,4 +1,4 @@
-import {AuthData} from "../contexts/Auth"
+/*import {AuthData} from "../contexts/Auth"
 
 async function signIn(email: string, password: string): Promise<AuthData>{
 
@@ -18,3 +18,5 @@ async function signIn(email: string, password: string): Promise<AuthData>{
 }
 
 export const authService = {signIn};
+
+*/
