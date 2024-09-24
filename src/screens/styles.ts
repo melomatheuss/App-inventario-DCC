@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
     paddingTop: 16,
-    paddingBottom: 32,
+    paddingBottom: 50,
   },
   title: {
     fontWeight: 'bold',

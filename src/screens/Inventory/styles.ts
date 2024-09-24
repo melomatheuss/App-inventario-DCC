@@ -125,4 +125,56 @@ export const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5', // Cor de fundo do botão
     marginLeft: 10, // Espaçamento à esquerda
   },
+  confirmationContainer: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
+    width: '80%',
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  
+  confirmationText: {
+    fontSize: 18,
+    marginBottom: 20,
+  },
+  
+  confirmationButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+  },
+  
+  confirmButton: {
+    backgroundColor: 'red',
+    padding: 10,
+    borderRadius: 5,
+    flex: 1,
+    marginRight: 5,
+  },
+  
+  cancelButton: {
+    backgroundColor: 'gray',
+    padding: 10,
+    borderRadius: 5,
+    flex: 1,
+    marginLeft: 5,
+  },
+  
+  confirmButtonText: {
+    color: 'white',
+    textAlign: 'center',
+  },
+  
+  cancelButtonText: {
+    color: 'white',
+    textAlign: 'center',
+  },
+  
+  deleteButtonText: {
+    color: 'white',
+    textAlign: 'center',
+  },
+  
 });
