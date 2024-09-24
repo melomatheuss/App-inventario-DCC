@@ -9,12 +9,10 @@ type RootStackParamList = {
   Inventory: undefined;
   ScanBarCode:undefined;
   Registration:undefined;
-  // Adicione outras rotas aqui conforme necessário
 };
 
 export function HomeScreen() {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>();
-  // const {signOut} = useAuth();
 
   return (
     <View style={styles.container}>

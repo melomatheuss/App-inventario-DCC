@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
     top: '50%',
   },
   photoButton: {
-    backgroundColor: '#3498db',
+    backgroundColor: '#68b2be',
     padding: 15,
     borderRadius: 5,
     marginVertical: 10,
@@ -76,14 +76,14 @@ export const styles = StyleSheet.create({
     marginTop: 20,
   },
   qrButton: {
-    backgroundColor: '#2ecc71',
+    backgroundColor: '#68b2be',
     padding: 15,
     borderRadius: 5,
     width: '45%',
     alignItems: 'center',
   },
   saveButton: {
-    backgroundColor: '#e74c3c',
+    backgroundColor: '#68b2be',
     padding: 15,
     borderRadius: 5,
     width: '45%',
