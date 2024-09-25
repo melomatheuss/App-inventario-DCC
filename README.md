@@ -70,8 +70,8 @@ Para rodar o projeto localmente, você precisará de:
 
   Clone o repositório:
 
-    git clone https://github.com/seu-usuario/App-DCC-Inventário.git
-
+    https://github.com/melomatheuss/App-inventario-DCC.git
+  
   Instale as dependências:
 
     npm install
