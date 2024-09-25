@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1052758925505",
+    "project_id": "inventario-dcc",
+    "storage_bucket": "inventario-dcc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052758925505:android:fa1dbec3611d8420cd7440",
+        "android_client_info": {
+          "package_name": "com.anonymous.appdccinventario"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhR2Cr9G2E3sYKqog3f-TM62XDfMb7iIc"
+
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

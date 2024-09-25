@@ -1,0 +1,3 @@
+# App-inventario-DCC
+
+Projeto usado como requisito para obtenção de nota na discilplina...
